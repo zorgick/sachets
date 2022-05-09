@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "checkJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@sachets/ui": [
+        "./modules/ui/src"
+      ]
+    }
+  },
+  "ts-node": {
+    "transpileOnly": true
+  }
+}

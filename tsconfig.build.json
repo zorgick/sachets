@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "declaration": true,
+    "declarationMap": true,
+    "noEmitOnError": true,
+    "sourceMap": true,
+    "skipLibCheck": true
+  }
+}
