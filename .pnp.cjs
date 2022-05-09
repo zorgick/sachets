@@ -134,8 +134,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.31"],\
             ["@types/react", "npm:18.0.9"],\
             ["@types/react-dom", "npm:18.0.3"],\
-            ["@yarnpkg/esbuild-plugin-pnp", "virtual:11ecb5922cbaf5638b181d89f6fcce8ea05756c4631d8b87beffcfa322076c6ef562768bc0efe6d873dc52a496bd460af0e049b6e0276b2eaaeb77f4a0c570ef#npm:3.0.0-rc.5"],\
-            ["esbuild", "npm:0.14.38"],\
             ["react", "npm:18.1.0"],\
             ["react-dom", "virtual:11ecb5922cbaf5638b181d89f6fcce8ea05756c4631d8b87beffcfa322076c6ef562768bc0efe6d873dc52a496bd460af0e049b6e0276b2eaaeb77f4a0c570ef#npm:18.1.0"],\
             ["typescript", "patch:typescript@npm%3A4.6.4#~builtin<compat/typescript>::version=4.6.4&hash=bda367"]\
@@ -444,10 +442,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:11ecb5922cbaf5638b181d89f6fcce8ea05756c4631d8b87beffcfa322076c6ef562768bc0efe6d873dc52a496bd460af0e049b6e0276b2eaaeb77f4a0c570ef#npm:3.0.0-rc.5", {\
-          "packageLocation": "./.yarn/__virtual__/@yarnpkg-esbuild-plugin-pnp-virtual-28dc502320/0/cache/@yarnpkg-esbuild-plugin-pnp-npm-3.0.0-rc.5-f5b9101cba-882e10ade9.zip/node_modules/@yarnpkg/esbuild-plugin-pnp/",\
+        ["virtual:de8b26d4c6779dec61908611d3c4e3ac5bd23f059d3e8ce3fb19fa253ae31f5b1753a12ddee18c2864acf4ea6bd7e561f1e4f03b093a94cc193d7e55b8c31e74#npm:3.0.0-rc.5", {\
+          "packageLocation": "./.yarn/__virtual__/@yarnpkg-esbuild-plugin-pnp-virtual-70f28d0861/0/cache/@yarnpkg-esbuild-plugin-pnp-npm-3.0.0-rc.5-f5b9101cba-882e10ade9.zip/node_modules/@yarnpkg/esbuild-plugin-pnp/",\
           "packageDependencies": [\
-            ["@yarnpkg/esbuild-plugin-pnp", "virtual:11ecb5922cbaf5638b181d89f6fcce8ea05756c4631d8b87beffcfa322076c6ef562768bc0efe6d873dc52a496bd460af0e049b6e0276b2eaaeb77f4a0c570ef#npm:3.0.0-rc.5"],\
+            ["@yarnpkg/esbuild-plugin-pnp", "virtual:de8b26d4c6779dec61908611d3c4e3ac5bd23f059d3e8ce3fb19fa253ae31f5b1753a12ddee18c2864acf4ea6bd7e561f1e4f03b093a94cc193d7e55b8c31e74#npm:3.0.0-rc.5"],\
             ["@types/esbuild", null],\
             ["esbuild", "npm:0.14.38"],\
             ["tslib", "npm:1.14.1"]\
@@ -2017,7 +2015,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.31"],\
             ["@types/react", "npm:18.0.9"],\
             ["@types/react-dom", "npm:18.0.3"],\
-            ["@yarnpkg/esbuild-plugin-pnp", "virtual:11ecb5922cbaf5638b181d89f6fcce8ea05756c4631d8b87beffcfa322076c6ef562768bc0efe6d873dc52a496bd460af0e049b6e0276b2eaaeb77f4a0c570ef#npm:3.0.0-rc.5"],\
+            ["@yarnpkg/esbuild-plugin-pnp", "virtual:de8b26d4c6779dec61908611d3c4e3ac5bd23f059d3e8ce3fb19fa253ae31f5b1753a12ddee18c2864acf4ea6bd7e561f1e4f03b093a94cc193d7e55b8c31e74#npm:3.0.0-rc.5"],\
             ["esbuild", "npm:0.14.38"],\
             ["react", "npm:18.1.0"],\
             ["react-dom", "virtual:11ecb5922cbaf5638b181d89f6fcce8ea05756c4631d8b87beffcfa322076c6ef562768bc0efe6d873dc52a496bd460af0e049b6e0276b2eaaeb77f4a0c570ef#npm:18.1.0"],\
