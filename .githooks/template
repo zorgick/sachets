@@ -1,0 +1,4 @@
+#!/bin/bash
+. "$(dirname "$0")/common.sh"
+
+# Your code goes here

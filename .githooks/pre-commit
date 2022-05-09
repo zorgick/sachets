@@ -1,0 +1,68 @@
+#!/bin/bash
+. "$(dirname "$0")/common.sh"
+[[ -f "$(dirname "$0")/env.sh" ]] && . "$(dirname "$0")/env.sh"
+log info "Starting..." $0
+
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+if [[ $STAGED_FILES == "" ]]; then
+  log info "No staged files found. Skipping." $0
+  exit 0
+fi
+
+if [[ $IS_LINT_DISABLED -eq 0 ]]; then
+  log info "Formatting and linting changed files:" 
+
+  yarn lint-staged
+  if [[ "$?" == 0 ]]; then
+    log success "Formatting and Linting Passed"
+  else
+    log error "Formatting and Linting Failed" $0
+    exit 1
+  fi
+fi
+
+# Skim over changes (u - page up, d - page down, q - exit)
+if [[ $IS_SKIM_ENABLED -eq 1 ]]; then
+  log info "Skim over changed files:" 
+  git diff --staged
+
+  exec < /dev/tty
+
+  while true; do
+    read -p "Are staged changes correct? (Y/n) " yn
+    case $yn in
+      [Yy] ) log success "Everything is correct! Continuing..."; break;;
+      [Nn] ) log error "Staged changes have flaws." $0; exit 1;;
+      * ) log info "Please answer y or n for yes or no.";;
+    esac
+  done
+
+fi
+
+# TODO think, why egrep exits on empty match
+set +e
+STAGED_SCRIPT_FILES=$(egrep "(\.js|\.ts|\.tsx|\.jsx)$" <<< $STAGED_FILES)
+set -e
+
+# Run this block only for staged script files
+if [[ ! $STAGED_SCRIPT_FILES == "" ]]; then
+
+  if [[ $IS_TEST_DISABLED -eq 0 ]]; then
+    log info "Running tests on changed files"
+    yarn jest --bail --findRelatedTests $STAGED_SCRIPT_FILES
+    if [[ "$?" == 0 ]]; then
+      log success "Jest Tests Passed"
+    else
+      log error "Jest Tests Failed" $0
+      exit 1
+    fi
+  fi
+
+  if [[ $IS_TYPE_DISABLED -eq 0 ]]; then
+    log info "Running type checks on changed files"
+    yarn type-check
+  fi
+fi
+
+log info "Finished" $0

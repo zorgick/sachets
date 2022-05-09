@@ -1,0 +1,35 @@
+#!/bin/bash
+. "$(dirname "$0")/vars.sh"
+. "$(dirname "$0")/common.sh"
+. "$(dirname "$0")/inquirer.sh"
+
+log info "Starting..." $0
+
+. "$(dirname "$0")/validateBranchName.sh"
+
+# If the default message is provided (e.g., rebase, merge, message, squash),
+# keep it and skip this block
+if [[ -z $2 ]]; then
+  log under "Choose type:"
+  exec < /dev/tty
+  ui_widget_select -c -k "${!TYPES[@]}" -i "${TYPES[@]}"
+
+  if [[ "$?" == 1 ]]; then
+    log error "Required change type is not selected." $0
+    exit 1
+  else
+    log info "Selected type: ${MENU_RESULT}";
+  fi
+
+  
+  if [[ ! $BRANCH_NAME == "HEAD" ]]; then
+    HINT=$(cat "$1")
+    echo "${MENU_RESULT}($ISSUE): " > "$1"
+    echo "${HINT}" >> "$1"
+  else
+    log error "Cannot commit from detached HEAD" $0
+    exit 1
+  fi
+fi
+
+log info "Finished" $0

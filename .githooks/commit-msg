@@ -1,0 +1,17 @@
+#!/bin/bash
+. "$(dirname "$0")/vars.sh"
+. "$(dirname "$0")/common.sh"
+
+log info "Starting..." $0
+COMMIT_HEAD="$(cat $1 | head -n 1)" 
+
+if [[ $COMMIT_HEAD =~ ^wip ]]; then
+  log info "Skipping commit message validation for \"wip\" change type"
+elif [[ $COMMIT_HEAD =~ $COMMIT_REGEXP ]]; then
+   log success "Commit message validated." 
+else
+   log error "Invalid commit message - ${UNDER}${COMMIT_HEAD}" $0
+   exit 1
+fi
+
+log info "Finished" $0

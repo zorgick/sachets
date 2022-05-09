@@ -1,0 +1,14 @@
+#!/bin/bash
+. "$(dirname "$0")/common.sh"
+. "$(dirname "$0")/env.sh"
+. "$(dirname "$0")/validateBranchName.sh"
+
+log info "Starting..." $0
+
+if [[ $IS_PUSH_CHECK_DISABLED -eq 0 ]]; then
+  log info "Running type checks on changed files"
+
+  yarn type-check
+fi
+
+log info "Finished." $0
