@@ -13,3 +13,4 @@ node_modules/
 
 .githooks/env.sh
 **/dist
+.worktrees

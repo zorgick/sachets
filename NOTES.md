@@ -4,6 +4,11 @@ PnP - [Plug and Play](https://yarnpkg.com/features/pnp)
 
 ## Checklist:
 
+## GIT
+
+- [x] test worktrees with _PnP_ modules
+      Everything works without errors
+
 ## TYPESCRIPT
 
 - [x] typescript cold start _LSP_ capabilities for workspaces
