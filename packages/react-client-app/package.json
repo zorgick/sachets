@@ -2,8 +2,6 @@
   "name": "react-client-app",
   "packageManager": "yarn@3.2.0",
   "scripts": {
-    "buildCompiledImports": "yarn esbuild ./testCompiledImportsOnly.tsx --tsconfig=tsconfig.compiled.json --bundle --outfile=out.js",
-    "buildSourceImports": "yarn node buildSourceImports.cjs",
     "buildSource": "yarn node buildSource.cjs"
   },
   "dependencies": {

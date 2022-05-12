@@ -44,18 +44,55 @@ PnP - [Plug and Play](https://yarnpkg.com/features/pnp)
   linkType: soft
   ```
 
-- [x] Investigate why _PnP_ is not working correctly with node*modules.
-      Probably multiple installs with different \_nodeLinker* options broke yarn at some point.
+- [x] Investigate why _PnP_ is not working correctly with node\*modules.
+      Probably multiple installs with different _nodeLinker_ options broke yarn at some point.
       Removed all yarn generated files and directories, _PnP_ works again. Workspaces now see
       modules from _PnP_.
 
-- [] yarn workspaces advanced level
-  This can help with detecting changes in the workspaces AND
-  targeting such changes in the workspaces.
-  [yarn workspaces list](https://yarnpkg.com/cli/workspaces/list/#gatsby-focus-wrapper) has `--since` flag that allows to
-  detect changed workspaces more granularly.
-  The other command [yarn workspaces foreach](https://yarnpkg.com/cli/workspaces/foreach) can help with running
-  commands in each workspace.
+- [x] yarn workspaces advanced level
+
+  - `yarn workspaces list --json --since=` command gives a very nice output of changed
+    workspaces since a certain commit/tag/branch. The output can later be used in scripting.
+  - `yarn workspaces foreach` has a significant value for optimizing CI and hooks runs. It
+    also has `--since` flag that helps with targeting only changed workspaces.
+    - `yarn workspaces foreach -p` runs common workspaces commands in parallel.
+      For example, let's add to "@sachets/ui" and "react-client-app" workspaces
+      _echo_ script and execute this command `yarn workspaces foreach -pv run echo`,
+      which should print "Hello from %workspace name%".
+      The output may differ, since the workspaces commands run in parallel and don't wait for
+      each other and ignore exit status codes.
+    ```bash
+    ➤ YN0000: [@sachets/ui]: Process started
+    ➤ YN0000: [react-client-app]: Process started
+    ➤ YN0000: [@sachets/ui]: Hello from @sachets/ui
+    ➤ YN0000: [@sachets/ui]: Process exited (exit code 0), completed in 0s 80ms
+    ➤ YN0000: [react-client-app]: Hello from react-client-app
+    ➤ YN0000: [react-client-app]: Process exited (exit code 0), completed in 0s 76ms
+    ➤ YN0000: Done in 0s 85ms
+    ```
+    - `yarn workspaces foreach -pt` in turn makes yarn to wait for workspace dependencies
+      to finish, even if the parallel flag is on. In our example "react-client-app" depends on
+      "@sachets/ui", so the output will be:
+    ```bash
+    ➤ YN0000: [@sachets/ui]: Process started
+    ➤ YN0000: [@sachets/ui]: Hello from @sachets/ui
+    ➤ YN0000: [@sachets/ui]: Process exited (exit code 0), completed in 0s 46ms
+    ➤ YN0000: [react-client-app]: Process started
+    ➤ YN0000: [react-client-app]: Hello from react-client-app
+    ➤ YN0000: [react-client-app]: Process exited (exit code 0), completed in 0s 39ms
+    ```
+    This command interupts execution if the dependent workspace exits with the status
+    code other than **0**. So it is quite handy to control the flow, when we need all
+    dependencies to succeed.
+    ```bash
+    ➤ YN0000: [@sachets/ui]: Process started
+    ➤ YN0000: [@sachets/ui]: Hello from @sachets/ui
+    ➤ YN0000: [@sachets/ui]: Process exited (exit code 1), completed in 0s 49ms
+    ➤ YN0000: The command failed for workspaces that are depended upon by other workspaces; can't satisfy the dependency graph
+    ➤ YN0000: Failed with errors in 0s 53ms
+    ```
+
+- [] Discover possibilities of `foreach` command on nested workspaces
 
 ## ESBUILD
 
